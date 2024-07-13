@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model DownloadRecord {
+  id        Int      @id @default(autoincrement())
+  thumb     String
+  url       String
+  path      String
+  status    Int      @default(1)
+  createdAt DateTime @default(now()) @map("created_at")
+}
+
+model Collection {
+  id        Int      @id @default(autoincrement())
+  name      String
+  desc      String?
+  createdAt DateTime @default(now()) @map("created_at")
+}
+
+model CollectionItem {
+  id            Int      @id @default(autoincrement())
+  collection_id Int
+  wallpaper_url String
+  smallThumb    String?  @map("small_thumb")
+  originalThumb String?  @map("original_thumb")
+  createdAt     DateTime @default(now()) @map("created_at")
+}
